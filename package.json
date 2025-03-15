@@ -1,0 +1,22 @@
+{
+  "name": "github-user-activity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oskarcokl/github-user-activity.git"
+  },
+  "author": "Oskar Cokl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oskarcokl/github-user-activity/issues"
+  },
+  "homepage": "https://github.com/oskarcokl/github-user-activity#readme",
+  "devDependencies": {
+    "@types/node": "^22.13.10"
+  }
+}
