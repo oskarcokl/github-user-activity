@@ -1,0 +1,5 @@
+-   [ ] accept username as CLI param
+-   [ ] call API for username
+-   [ ] handle user errors
+-   [ ] handle API errors
+-   [ ] print user activity
