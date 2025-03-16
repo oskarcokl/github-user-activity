@@ -36,9 +36,13 @@ async function main(args: string[]) {
         // handle fetch error
     }
 
+    console.log(`Output:`);
     Object.keys(parsedData).forEach((key) => {
         switch (key) {
             case 'WatchEvent':
+                parsedData[key].forEach((userEvent: UserActivityData) =>
+                    console.log(`- Watched ${userEvent.repo.name}`)
+                );
                 break;
             case 'PushEvent':
                 const commitsToRepos: { [key: string]: number } = {};
