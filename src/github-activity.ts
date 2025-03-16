@@ -60,6 +60,10 @@ async function main(args: string[]) {
             case 'PullRequestEvent':
                 break;
             case 'CreateEvent':
+                parsedData[key].forEach((userEvent: UserActivityData) =>
+                    console.log(`- Created ${userEvent.repo.name}`)
+                );
+                break;
                 break;
 
             default:
