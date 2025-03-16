@@ -1,16 +1,40 @@
 #!/usr/bin/env node
 
+import { writeFileSync } from 'fs';
 import { exit } from 'process';
+
+type UserActivityData = {
+    type: string; // change to enum
+    repo: {
+        name: string;
+    };
+};
 
 const endpoint = (userName: string) => `https://api.github.com/users/${userName}/events/public`;
 
 function main(args: string[]) {
+async function main(args: string[]) {
     const username = args[0];
 
     if (typeof username === 'undefined') {
         printHelpMessage();
         console.error('ERROR: No username provided');
         exit(1);
+    }
+
+    const parsedData: { [key: string]: any } = {};
+
+    try {
+        const res = await fetch(endpoint(username));
+        const data = (await res.json()) as UserActivityData[];
+        data.forEach((event) => {
+            if (!parsedData[event.type]) parsedData[event.type] = [];
+
+            parsedData[event.type].push(event);
+        });
+        writeFileSync('dump.json', JSON.stringify(data), { flag: 'w+' });
+    } catch (error) {
+        // handle fetch error
     }
 }
 
