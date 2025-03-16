@@ -36,6 +36,25 @@ async function main(args: string[]) {
         // handle fetch error
     }
 
+    // All possible github activity events
+    // CommitCommentEvent
+    // CreateEvent
+    // DeleteEvent
+    // ForkEvent
+    // GollumEvent
+    // IssueCommentEvent
+    // IssuesEvent
+    // MemberEvent
+    // PublicEvent
+    // PullRequestEvent
+    // PullRequestReviewEvent
+    // PullRequestReviewCommentEvent
+    // PullRequestReviewThreadEvent
+    // PushEvent
+    // ReleaseEvent
+    // SponsorshipEvent
+    // WatchEvent
+
     console.log(`Output:`);
     Object.keys(parsedData).forEach((key) => {
         switch (key) {
@@ -58,14 +77,22 @@ async function main(args: string[]) {
 
                 break;
             case 'PullRequestEvent':
+                const pullRequestToRepo: { [key: string]: number } = {};
+                parsedData[key].forEach((userEvent: UserActivityData) => {
+                    const repo = userEvent.repo.name;
+                    if (!pullRequestToRepo[repo]) pullRequestToRepo[repo] = 0;
+                    pullRequestToRepo[repo]++;
+                });
+
+                Object.keys(pullRequestToRepo).forEach((repo) =>
+                    console.log(`- Created ${pullRequestToRepo[repo]} pull requests to ${repo}`)
+                );
                 break;
             case 'CreateEvent':
                 parsedData[key].forEach((userEvent: UserActivityData) =>
                     console.log(`- Created ${userEvent.repo.name}`)
                 );
                 break;
-                break;
-
             default:
                 console.error(`Event type not supported ${key}`);
                 break;
