@@ -12,7 +12,6 @@ type UserActivityData = {
 
 const endpoint = (userName: string) => `https://api.github.com/users/${userName}/events/public`;
 
-function main(args: string[]) {
 async function main(args: string[]) {
     const username = args[0];
 
@@ -36,6 +35,34 @@ async function main(args: string[]) {
     } catch (error) {
         // handle fetch error
     }
+
+    Object.keys(parsedData).forEach((key) => {
+        switch (key) {
+            case 'WatchEvent':
+                break;
+            case 'PushEvent':
+                const commitsToRepos: { [key: string]: number } = {};
+                parsedData[key].forEach((userEvent: UserActivityData) => {
+                    const repo = userEvent.repo.name;
+                    if (!commitsToRepos[repo]) commitsToRepos[repo] = 0;
+                    commitsToRepos[repo]++;
+                });
+
+                Object.keys(commitsToRepos).forEach((repo) =>
+                    console.log(`- Pushed ${commitsToRepos[repo]} commits to ${repo}`)
+                );
+
+                break;
+            case 'PullRequestEvent':
+                break;
+            case 'CreateEvent':
+                break;
+
+            default:
+                console.error(`Event type not supported ${key}`);
+                break;
+        }
+    });
 }
 
 const helpMessage = `
