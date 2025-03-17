@@ -1,5 +1,6 @@
--   [ ] accept username as CLI param
--   [ ] call API for username
+-   [x] accept username as CLI param
+-   [x] call API for username
 -   [ ] handle user errors
 -   [ ] handle API errors
--   [ ] print user activity
+-   [x] print user activity
+-   [ ] refactor user activity printing to be less code

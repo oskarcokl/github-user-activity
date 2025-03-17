@@ -36,25 +36,6 @@ async function main(args: string[]) {
         // handle fetch error
     }
 
-    // All possible github activity events
-    // CommitCommentEvent
-    // CreateEvent
-    // DeleteEvent
-    // ForkEvent
-    // GollumEvent
-    // IssueCommentEvent
-    // IssuesEvent
-    // MemberEvent
-    // PublicEvent
-    // PullRequestEvent
-    // PullRequestReviewEvent
-    // PullRequestReviewCommentEvent
-    // PullRequestReviewThreadEvent
-    // PushEvent
-    // ReleaseEvent
-    // SponsorshipEvent
-    // WatchEvent
-
     console.log(`Output:`);
     Object.keys(parsedData).forEach((key) => {
         switch (key) {
